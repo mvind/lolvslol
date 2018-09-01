@@ -12,7 +12,7 @@ def index():
 def result():
     if request.method == 'POST':
         res = request.form
-        print(res)
+        print(dict(res))
         return render_template('result.html', data = res)
 
     return render_template('result.html')
