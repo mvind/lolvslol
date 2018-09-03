@@ -24,22 +24,30 @@ def matchup(res):
 
     returns: whatever
     '''
+    
 
 
-def getChampId(name):
-    '''return champion Id from champ name
+
+def convert(d):
+    '''convert name into id or id into name
 
     Args:
-        name: 'Draven'
+        d: type either int or str
     returns:
-        champId = '13'
-        or none found = 0
-
+        id = 13
+        name = 'Annie'
     '''
-    for c in id.li:
-        print(c)
-        if c['name'] == name:
-            return c['id']
-    return 0
+    #res = {'status': None, 'value': None}
 
-print(getChampId('Draven'))
+    if type(d) == int:
+        for c in id.li:
+            if c['id'] == d:
+                return c['name'], 200
+        return 'No ID match', 0
+    elif type(d) == str:
+        for c in id.li:
+            if c['name'] == d:
+                return c['id'], 200
+        return 'No name match', 0
+    else:
+        return 'Nothing found', 0
