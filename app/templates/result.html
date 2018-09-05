@@ -1,8 +1,27 @@
-<html>
-  <body>
-    {% if data %}
-    <p> {{ data }} </p>
-    {% endif %}
-    <a href='/'>Tilbage</a>
-  </body>
-</html>
+{% extends "bootstrap/base.html" %}
+
+{% block content%}
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading"> <h2>Winrate for {{ role }}</h2> </div>
+      <div class="panel-body">
+        <p> Data used ensures that there are played over the minimum threshold (at least 1000 games and at least 11% playrate in the role).</p>
+      </div>
+
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <th>Champion</th>
+          <th>Winrate (%)</th>
+        </tr>
+          {% for item in data %}
+          <tr>
+            <td> {{item[1]}} </td>
+            <td> {{item[2]}} </td>
+          </tr>
+          {% endfor %}
+      </table>
+    </div>
+<a href='/'>Tilbage</a>
+{% endblock %}

@@ -59,7 +59,6 @@ def role_winrate(role):
                 break # Early break because roles are unique
 
     # Now request winrate for each id in list and
-    print(idlist)
     counter = 0
     for i in idlist:
         r = requests.get('http://api.champion.gg/v2/champions/'+str(i[0])+'?api_key=0a4d02ca842ecb20033591ba4987a34d')
@@ -67,7 +66,9 @@ def role_winrate(role):
 
         for entry in data: # champions can be played in more than one role
             if entry['_id']['role'] == str(role):
-                idlist[counter].append(entry['winRate'])
+                idlist[counter].append(str(entry['winRate'])[:5]) # Shorten the winrate int to 3 digits
                 counter += 1
 
-    return idlist
+    # Now we sort the list by winrate in descending order
+    resObj = sorted(idlist, key= lambda champ: champ[2], reverse=True)
+    return resObj

@@ -17,7 +17,7 @@ def result():
         form_res['Roles'] = post_data['Roles']
         res_data = role_winrate(form_res['Roles'])
 
-        return render_template('result.html', data=res_data)
+        return render_template('result.html', data=res_data, role=form_res['Roles'])
 
 
     return render_template('result.html')

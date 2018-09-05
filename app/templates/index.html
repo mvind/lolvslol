@@ -1,5 +1,6 @@
-<html>
-  <body>
+{% extends "bootstrap/base.html" %}
+
+{% block content %}
     <form action="http://localhost:5000/result" method="post">
       <p>Champion<input type="text" name="Name"/></p>
       <select name="Roles">
@@ -10,5 +11,4 @@
         <option value="DUO_SUPORT">Support</option>
       </select>
     </form>
-  </body>
-</html>
+{% endblock %}
