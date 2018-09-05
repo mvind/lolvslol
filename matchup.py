@@ -5,17 +5,6 @@ base_urL = 'http://api.champion.gg/champion?'
 #/champions/:id/:role/matchups
 match_url = 'http://api.champion.gg/v2/champions/'
 
-# r = requests.get(url)
-# url2 = 'http://api.champion.gg/champion/draven?api_key='+api_key
-# print(api_key)
-#
-# r2 = requests.get(url2)
-#
-# print(r2.json())
-# #print(r.json())
-# #/champion/:name?api_key=<API_KEY>
-
-
 def convert(d):
     '''convert name into id or id into name
 
@@ -40,18 +29,45 @@ def convert(d):
     else:
         return 'Nothing found', 0
 
+#
+# def parse(s):
+#     r = ''
+#     for matchup in s:
+#         id = matchup['_id']
+#         print(convert(id['champ1_id']), 'vs.', convert(id['champ2_id']))
+#
+
+
 
 test_data = {'Name': 'Draven', 'Roles': 'DUO_CARRY'}
 
-def matchup(res):
-    '''return matchup data from  user response
-
-    Args:
-        res: {'Name': ['Draven'], 'Roles': ['adc']}
-
-    returns: whatever
+def role_winrate(role):
     '''
-    url = match_url + str(convert(res['Name'])) + '/' + str(res['Roles']) + '/matchups?api_key=' + api_key
-    r = requests.get(url)
-    r = r.json()
-    return r
+        args:
+            role: string i.e 'TOP'
+        returns:
+            winrate of all champs played in given role
+
+    '''
+    champDB = id.li2
+    idlist = []
+    # First we create a idlist of champions which play in the args role
+    for champ in champDB:
+        for r in champ['role']:
+            if r == str(role):
+                idlist.append([champ['id'], champ['name']])
+                break # Early break because roles are unique
+
+    # Now request winrate for each id in list and
+    print(idlist)
+    counter = 0
+    for i in idlist:
+        r = requests.get('http://api.champion.gg/v2/champions/'+str(i[0])+'?api_key=0a4d02ca842ecb20033591ba4987a34d')
+        data = r.json()
+
+        for entry in data: # champions can be played in more than one role
+            if entry['_id']['role'] == str(role):
+                idlist[counter].append(entry['winRate'])
+                counter += 1
+
+    return idlist
