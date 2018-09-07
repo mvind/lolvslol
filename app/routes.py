@@ -1,11 +1,12 @@
 from app import app
 from flask import render_template, request
 from matchup import *
+test = ['1','2','3']
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', data = test)
 
 
 @app.route('/result', methods=['POST','GET'])
