@@ -12,8 +12,9 @@ def index():
 def result():
     if request.method == 'POST':
         post_data = request.form
+        print(post_data)
         form_res = {}
-        form_res['Name'] = post_data['Name']
+        #form_res['Name'] = post_data['Name']
         form_res['Roles'] = post_data['Roles']
         res_data = role_winrate(form_res['Roles'])
 
@@ -21,3 +22,16 @@ def result():
 
 
     return render_template('result.html')
+
+
+@app.route('/matches', methods=['POST','GET'])
+def matches():
+    if request.method == 'POST':
+        form_res = {}
+        post_data = request.form
+        
+        form_res['Name'] = post_data['Name']
+        form_res['Roles'] = post_data['Roles']
+        res_data = role_matchups(form_res)
+
+        return render_template('matches.html')

@@ -1,8 +1,18 @@
+<!DOCTYPE html>
 {% extends "bootstrap/base.html" %}
 
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='index_style.css')}}">
+{% endblock %}
+
+
 {% block content %}
+<div class="container">
+  <h2>Get current champion winrate of each role</h2>
     <form action="http://localhost:5000/result" method="post">
-      <p>Champion<input type="text" name="Name"/></p>
+      <input type="submit" value="Submit">
       <select name="Roles">
         <option value="TOP">Top</option>
         <option value="JUNGLE">Jungle</option>
@@ -11,4 +21,17 @@
         <option value="DUO_SUPORT">Support</option>
       </select>
     </form>
+    <h2>Get champion matchup data</h2>
+    <form action="/matches" method="post">
+       <p>Champion<input type="text" name="Name"/></p>
+       <select name="Roles">
+         <option value="TOP">Top</option>
+         <option value="JUNGLE">Jungle</option>
+         <option value="MIDDLE">Mid</option>
+         <option value="DUO_CARRY">Adc</option>
+         <option value="DUO_SUPORT">Support</option>
+       </select>
+       <input type="submit" value="Submit">
+    </form>
+</div>
 {% endblock %}
