@@ -2,6 +2,36 @@
 
 {% block content%}
 {{ super() }}
-<h1>hwerlkwjrl</h1>
+<a href="/">Tilbage</a>
+
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading"> <h2>Matchup data for {{ role }}</h2> </div>
+      <div class="panel-body">
+        <p> Data used ensures that there are played over the minimum threshold (at least 1000 games and at least 11% playrate in the role).</p>
+      </div>
+
+      <!-- Table -->
+      <table class="table">
+        <tr>
+          <th>Opponent</th>
+          <th>Winrate (%)</th>
+          <th>Avg. deaths</th>
+          <th>Avg. assists</th>
+          <th>Avg. kills</th>
+        </tr>
+          {% for item in data %}
+          <tr>
+            <td> {{item['opponent_name']}} </td>
+            <td> {{item['winrate']}} </td>
+            <td> {{item['deaths']}} </td>
+            <td> {{item['assists']}} </td>
+            <td> {{item['kills']}} </td>
+          </tr>
+          {% endfor %}
+      </table>
+    </div>
+
+<a href='/'>Tilbage</a>
 
 {% endblock %}
