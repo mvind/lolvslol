@@ -29,9 +29,12 @@ def matches():
     if request.method == 'POST':
         form_res = {}
         post_data = request.form
-        
         form_res['Name'] = post_data['Name']
         form_res['Roles'] = post_data['Roles']
         res_data = role_matchups(form_res)
 
-        return render_template('matches.html')
+        # Catch if champion not found in the api request
+        if res_data == 404:
+            return render_template('/notfound.html')
+            
+        return render_template('matches.html', data = res_data, role=form_res['Roles'])
