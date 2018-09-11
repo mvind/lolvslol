@@ -25,7 +25,7 @@ def role_matchups(res):
         args:
 
     """
-    return_dict = {}
+    return_list = []
     name = res['Name']
     role = res['Roles']
     champ_id = nameToId(name)
@@ -35,7 +35,7 @@ def role_matchups(res):
     data = response.json()
 
     if data == []:
-        return 'Champ not found'
+        return 404
 
     temp_list = []
     # request format is a list containing dictonaries with json formatted match data
@@ -77,14 +77,37 @@ def role_matchups(res):
         assists = userChamp['assists']
         kills = userChamp['kills']
 
+        # format decimal places
+        n = 4 # n-1 number digits after decimal point
+
+        li = [winrate, deaths, assists ,kills]
+        li = ['{0:.{1}}'.format(float(el),n) for el in li]
+
         # Just store the data in a temporary list
-        temp_list.append([matchup_name, winrate, deaths, assists, kills])
+        temp_list.append([matchup_name] + li)
+
+    # Now we clean up the data and format it into a return dictonary
+    ################################################################
+
+    # Remove entries with a winrate == 1
+    for i, val in enumerate(temp_list):
+        if val[1] == 1 or val[1] == 0:
+            temp_list.pop(i)
 
     # Now we sort the list by winrate
-    sorted_list = sorted(temp_list, key=itemgetter(1), reverse=True)
-    print(sorted_list)
+    sorted_temp_list = sorted(temp_list, key=itemgetter(1), reverse=True)
 
-    return 0
+    for element in sorted_temp_list:
+        data_entry = {
+            'opponent_name': element[0],
+            'winrate': element[1],
+            'deaths': element[2],
+            'assists': element[3],
+            'kills': element[4]
+        }
+        return_list.append(data_entry)
+
+    return return_list
 
 def role_winrate(role):
     '''
