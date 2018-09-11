@@ -21,9 +21,13 @@ def idToName(champ_id: int):
 
 def role_matchups(res):
     """
-    Gets role matchup data from api
-        args:
-
+    Gets role matchup data from api.
+        args: {Name: 'Draven', Roles:'DUO_CARRY'}
+        returns: [{'opponent_name': 'Lissandra',
+                        'winrate': '0.4413',
+                        'deaths': '6.765',
+                        'assists': '4.486',
+                        'kills': '6.279'},....]
     """
     return_list = []
     name = res['Name']
@@ -127,17 +131,29 @@ def role_winrate(role):
                 break # Early break because roles are unique
 
     # Now request winrate for each id in list
+
     counter = 0
+
     for i in idlist:
         r = requests.get('http://api.champion.gg/v2/champions/'+str(i[0])+'?api_key='+api_key)
         data = r.json()
+        #print(len(data),data)
 
-        for entry in data: # champions can be played in more than one role
-            if entry['_id']['role'] == str(role):
-                idlist[counter].append(str(entry['winRate'])[:5]) # Shorten the winrate int to 3 digits
-                counter += 1
+
+        for entry, val in enumerate(data): # champions can be played in more than one role
+            if val['_id']['role'] == str(role):
+                #print(str(val['winRate'])[:5], counter)
+                idlist[counter].append(str(val['winRate'])[:5]) # Shorten the winrate int to 3 digits
+                counter +=1
+                break
+            elif val['_id']['role'] != str(role) and entry  == len(data) - 1: # Catch faulty response with no role object
+                idlist[counter].append(str(0))
+                counter +=1
+                break #redudant
+
+
 
     # Now we sort the list by winrate in descending order
-    print(idlist, str(counter), str(len(idlist)))
+    #print(idlist, str(counter), str(len(idlist)))
     resObj = sorted(idlist, key= lambda champ: champ[2], reverse=True) # Causes bug when role is jungle????
     return resObj

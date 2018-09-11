@@ -12,7 +12,7 @@ def index():
 def result():
     if request.method == 'POST':
         post_data = request.form
-        print(post_data)
+        #print(post_data)
         form_res = {}
         #form_res['Name'] = post_data['Name']
         form_res['Roles'] = post_data['Roles']
@@ -36,5 +36,5 @@ def matches():
         # Catch if champion not found in the api request
         if res_data == 404:
             return render_template('/notfound.html')
-            
+
         return render_template('matches.html', data = res_data, role=form_res['Roles'])

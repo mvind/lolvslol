@@ -1351,7 +1351,6 @@ li2=[
       'name':'Swain',
       'role':[
          'DUO_CARRY',
-         'DUO_SUPPORT',
          'MIDDLE',
          'TOP'
       ]
