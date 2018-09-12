@@ -14,3 +14,5 @@ You need to setup a local key.py file, which will contain a variable named 'key'
 # Usage
 Screen dumps:
 ![Index](resources/index_dump.png)
+![Results](resources/result_dump.png)
+![Matches](resources/matches_dump.png)
