@@ -5,4 +5,5 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 Bootstrap(app)
 
+
 from app import routes

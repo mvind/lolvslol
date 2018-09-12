@@ -19,9 +19,8 @@ def result():
         res_data = role_winrate(form_res['Roles'])
 
         return render_template('result.html', data=res_data, role=form_res['Roles'])
-
-
-    return render_template('result.html')
+    # No data redirect to /notfound
+    return render_template('notfound.html')
 
 
 @app.route('/matches', methods=['POST','GET'])
