@@ -8,16 +8,17 @@ This project uses champion.gg api to create to fetch information of either the w
 
 # Installation
 Install dependencies into virtualenv:
-        ```bash   
+        ```   
         pip3 install -r requirements.txt
         ```
 ## Setup
 *  You need to setup a local key.py file, which will contain a variable named 'key' which stores your unique api key as a string.
 
 *  Now you run the flask server by:
-    source flask/bin/activate
-    flask run
-
+        ```
+        source flask/bin/activate
+        flask run
+        ```
 # Usage
 Screen dumps:
 ![Index](resources/index_dump.png)
