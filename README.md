@@ -8,8 +8,9 @@ This project uses champion.gg api to create to fetch information of either the w
 
 # Installation
 Install dependencies into virtualenv:
-    pip3 install -r requirements.txt
-
+        ```bash   
+        pip3 install -r requirements.txt
+        ```
 ## Setup
 *  You need to setup a local key.py file, which will contain a variable named 'key' which stores your unique api key as a string.
 
