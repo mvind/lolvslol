@@ -1,4 +1,4 @@
-#h1 Lol vs Lol (Leauge of legends)
+# Lol vs Lol (Leauge of legends)
 This project uses champion.gg api to create to fetch information of either the win-rates of certain Leauge of Legends role, or stats for a matchup for a certain champion in a certain role.
 
 ### To do list:
@@ -16,7 +16,7 @@ Install dependencies into virtualenv:
 *  Now you run the flask server by:
     source flask/bin/activate
     flask run
-    
+
 # Usage
 Screen dumps:
 ![Index](resources/index_dump.png)
