@@ -19,4 +19,6 @@ Install dependencies into virtualenv:
     
 # Usage
 Screen dumps:
-![Index](./resources/index_dump.jpg)
+![Index](resources/index_dump.png)
+![Results](resources/result_dump.png)
+![Matches](resources/matches_dump.png)
